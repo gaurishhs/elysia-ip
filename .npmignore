@@ -1,5 +1,4 @@
 .github
 node_modules
-src
 .eslintrc.js
 .gitignore
