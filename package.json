@@ -1,6 +1,6 @@
 {
   "name": "elysia-ip",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "author": {
     "name": "Gaurish Sethia",
@@ -28,7 +28,6 @@
   ],
   "scripts": {
     "build": "tsc --project tsconfig.esm.json",
-    "publish": "npm run build && npm publish",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
