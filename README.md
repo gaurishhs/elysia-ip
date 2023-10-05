@@ -1,5 +1,7 @@
 # elysia-ip
 
+![badge](https://github.com/gaurishhs/elysia-ip/actions/workflows/npm-publish.yml/badge.svg)
+
 Get the Client Ip Address in Elysia.
 
 It supports Cloudflare, Fastly and other runtimes as well.
