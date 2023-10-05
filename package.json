@@ -18,7 +18,7 @@
     "node": "./dist/index.js",
     "default": "./dist/index.js"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./src/index.ts",
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
   "keywords": [
