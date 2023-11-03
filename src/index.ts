@@ -36,7 +36,7 @@ export const ip = (config: {
     return app.derive(({ request }) => {
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: clientIP || app.server!.requestIP(request)
+            ip: clientIP || app.server!.requestIP(request)!.address
         }
     })
 }
