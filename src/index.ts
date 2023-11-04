@@ -1,7 +1,6 @@
 import { Elysia } from 'elysia';
 
 export type IPHeaders = 'x-real-ip' | 'x-client-ip' | 'cf-connecting-ip' | 'fastly-client-ip' | 'x-cluster-client-ip' | 'x-forwarded' | 'forwarded-for' | 'forwarded' | 'x-forwarded' | 'appengine-user-ip' | 'true-client-ip' | 'cf-pseudo-ipv4' | (string & {})
-
 export const headersToCheck: IPHeaders[] = [
     'x-real-ip', // Nginx proxy/FastCGI
     'x-client-ip', // Apache https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html#page-header 
@@ -34,9 +33,12 @@ export const ip = (config: {
     checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
+        if (globalThis.Bun) return {
+            ip: app.server!.requestIP(request)
+        } 
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: clientIP || app.server!.requestIP(request)
+            ip: clientIP
         }
     })
 }
