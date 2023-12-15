@@ -30,7 +30,8 @@ const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToCheck) => 
 }
 
 export const ip = (config: {
-    checkHeaders?: IPHeaders[]
+    checkHeaders?: IPHeaders[],
+    sanitize?: Function
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
         if (globalThis.Bun) return {
@@ -38,7 +39,7 @@ export const ip = (config: {
         } 
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: clientIP
+            ip: config.sanitize ? config.sanitize(clientIP) : clientIP
         }
     })
 }
