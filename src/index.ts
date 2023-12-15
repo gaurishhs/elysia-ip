@@ -35,7 +35,7 @@ export const ip = (config: {
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
         if (globalThis.Bun) return {
-            ip: app.server!.requestIP(request)
+            ip: config.sanitize ? config.sanitize(app.server!.requestIP(request)) : app.server!.requestIP(request)
         } 
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {

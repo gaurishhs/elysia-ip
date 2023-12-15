@@ -1,7 +1,6 @@
 {
-  "name": "elysia-ip",
-  "version": "0.0.4",
-  "type": "module",
+  "name": "elysia-ip-caamillo",
+  "version": "0.0.5",
   "author": {
     "name": "Gaurish Sethia",
     "url": "https://github.com/gaurishhs",
@@ -12,25 +11,6 @@
     "url": "https://github.com/gaurishhs/elysia-ip"
   },
   "main": "./dist/index.js",
-  "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.js",
-    "node": "./dist/index.js",
-    "default": "./dist/index.js"
-  },
-  "types": "./src/index.ts",
-  "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
-  "homepage": "https://github.com/gaurishhs/elysia-ip",
-  "keywords": [
-    "elysia",
-    "typescript",
-    "ip"
-  ],
-  "scripts": {
-    "build": "tsc --project tsconfig.esm.json",
-    "lint": "eslint . --ext .ts"
-  },
-  "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
@@ -40,5 +20,25 @@
   },
   "peerDependencies": {
     "elysia": ">= 0.2.0"
-  }
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.js",
+    "node": "./dist/index.js",
+    "default": "./dist/index.js"
+  },
+  "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
+  "homepage": "https://github.com/gaurishhs/elysia-ip",
+  "keywords": [
+    "elysia",
+    "typescript",
+    "ip"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --project tsconfig.esm.json",
+    "lint": "eslint . --ext .ts"
+  },
+  "type": "module",
+  "types": "./src/index.ts"
 }
