@@ -34,7 +34,7 @@ export const ip = (config: {
     sanitize?: Function
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
-        if (globalThis.Bun) return {
+        if (globalThis.Bun && app.server?.requestIP) return {
             ip: config.sanitize ? config.sanitize(app.server!.requestIP(request)) : app.server!.requestIP(request)
         } 
         const clientIP = getIP(request.headers, config.checkHeaders)
