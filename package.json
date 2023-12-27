@@ -27,7 +27,7 @@
     "ip"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.esm.json",
+    "build": "tsc",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
