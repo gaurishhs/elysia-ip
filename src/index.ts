@@ -34,18 +34,16 @@ export const ip = (config: {
      * Customize headers to check for IP address
      * @default ['x-real-ip', 'x-client-ip', 'cf-connecting-ip', 'fastly-client-ip', 'x-cluster-client-ip', 'x-forwarded', 'forwarded-for', 'forwarded', 'x-forwarded', 'appengine-user-ip', 'true-client-ip', 'cf-pseudo-ipv4']
      */
+    sanitize?: Function,
     checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
-        if (globalThis.Bun) {
-            if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)
-            return {
-                ip: app.server.requestIP(request)
-            }
-        }
+        if (globalThis.Bun && app.server?.requestIP) return {
+            ip: config.sanitize ? config.sanitize(app.server!.requestIP(request)) : app.server!.requestIP(request)
+        } 
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: clientIP
+            ip: config.sanitize ? config.sanitize(clientIP) : clientIP
         }
     })
 }
