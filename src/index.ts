@@ -16,7 +16,7 @@ export const headersToCheck: IPHeaders[] = [
     'cf-pseudo-ipv4', // Cloudflare 
 ]
 
-const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToCheck) => {
+export const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToCheck) => {
     if (typeof checkHeaders === 'string' && headers.get(checkHeaders)) return headers.get(checkHeaders)
     // X-Forwarded-For is the de-facto standard header
     if (headers.get('x-forwarded-for')) return headers.get('x-forwarded-for')?.split(',')[0]
@@ -30,16 +30,22 @@ const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToCheck) => 
 }
 
 export const ip = (config: {
-    checkHeaders?: IPHeaders[],
-    sanitize?: Function
+    /**
+     * Customize headers to check for IP address
+     * @default ['x-real-ip', 'x-client-ip', 'cf-connecting-ip', 'fastly-client-ip', 'x-cluster-client-ip', 'x-forwarded', 'forwarded-for', 'forwarded', 'x-forwarded', 'appengine-user-ip', 'true-client-ip', 'cf-pseudo-ipv4']
+     */
+    checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
     return app.derive(({ request }) => {
-        if (globalThis.Bun) return {
-            ip: config.sanitize ? config.sanitize(app.server!.requestIP(request)) : app.server!.requestIP(request)
-        } 
+        if (globalThis.Bun) {
+            if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)
+            return {
+                ip: app.server.requestIP(request)
+            }
+        }
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: config.sanitize ? config.sanitize(clientIP) : clientIP
+            ip: clientIP
         }
     })
 }

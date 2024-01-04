@@ -2,9 +2,10 @@
 
 ![badge](https://github.com/gaurishhs/elysia-ip/actions/workflows/npm-publish.yml/badge.svg)
 
-Get the Client Ip Address in Elysia.
+Get the client ip address in Elysia.
+It works with Bun, Cloudflare, Fastly and other runtimes.
 
-It supports Cloudflare, Fastly and other runtimes as well.
+Please consider starring the repository to show your ❤️ and support.
 
 ## Installation
 
@@ -18,9 +19,7 @@ bun a elysia-ip
 
 ### Introduction
 
-This plugin let's you get client's ip address in Elysia.js
-
-It supports Multiple runtimes (Cloudflare, Fastly Edge, etc.)
+This plugin adds a `ip` property to the context object. It contains the client ip address.
 
 ### Usage
 
@@ -32,6 +31,8 @@ new Elysia().use(ip()).get("/", ({ ip }) => ip).listen(3000);
 ```
 
 ### How does it work?
+
+For Bun runtime, We use `server.requestIP` introduced in Bun v1.0.4 to get the client ip address and early return it.
 
 It relies on headers for runtimes other than Bun. 
 Cloudflare and other providers send back specific headers, containing the IP address. For example `CF-Connecting-IP` for Cloudflare and `Fastly-Client-IP` for Fastly.
@@ -54,7 +55,7 @@ Priority list:
 12. `true-client-ip` (Akamai and Cloudflare)
 13. `cf-pseudo-ipv4` (Cloudflare)
 
-You can even specify your own header or list of headers if you want to as following
+You can even specify your own headers if you want to as following
 
 ```ts
 import { Elysia } from "elysia";
@@ -71,9 +72,6 @@ import { ip } from "elysia-ip";
 
 new Elysia().use(ip({ checkHeaders: "X-Forwarded-For" })).get("/", ({ ip }) => ip).listen(3000);
 ```
-
-For Bun runtime, We use `server.requestIP` introduced in Bun v1.0.4
-
 
 ## License
 MIT
