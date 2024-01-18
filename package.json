@@ -1,11 +1,11 @@
 {
   "name": "elysia-ip",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "author": {
     "name": "Gaurish Sethia",
     "url": "https://github.com/gaurishhs",
-    "email": "gaurishsethia@yahoo.com"
+    "email": "gaurishh.sethia@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,9 @@
     "require": "./dist/index.js",
     "import": "./dist/index.js",
     "node": "./dist/index.js",
-    "default": "./dist/index.js"
+    "default": "./dist/index.js",
+    "types": "./src/index.ts"
   },
-  "types": "./src/index.ts",
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
   "keywords": [
