@@ -43,6 +43,7 @@ export const ip = (config: {
                 ip: app.server.requestIP(request)
             }
         }
+        // @ts-ignore
         const clientIP = getIP(request.headers, config.checkHeaders)
         return {
             ip: clientIP
