@@ -17,7 +17,7 @@
     "import": "./src/index.ts",
     "node": "./src/index.ts",
     "default": "./src/index.ts",
-    "types": "./dist/index.d.ts"
+    "types": "./src/index.ts"
   },
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
