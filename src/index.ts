@@ -36,18 +36,23 @@ export const ip = (config: {
      */
     checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
-    return app.derive(({ request }) => {
+    app.state('ip', '');
+
+    app.onRequest(({ request, store }) => {
+        let ip;
+
         // @ts-ignore
         if (globalThis.Bun) {
             if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)
-            return {
-                ip: app.server.requestIP(request)
-            }
+            const requestIP = app.server.requestIP(request);
+            ip = requestIP?.address;
+        } else {
+            const clientIP = getIP(request.headers, config.checkHeaders)
+            ip = clientIP?.address
         }
-        // @ts-ignore
-        const clientIP = getIP(request.headers, config.checkHeaders)
-        return {
-            ip: clientIP
+
+        if (ip) {
+            store.clientIP = ip;
         }
     })
 }
