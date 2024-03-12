@@ -36,8 +36,6 @@ export const ip = (config: {
      */
     checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
-    app.state('ip', '');
-
     app.onRequest(({ request, store }) => {
         let ip;
 
@@ -52,7 +50,7 @@ export const ip = (config: {
         }
 
         if (ip) {
-            store.clientIP = ip;
+            store.ip = ip;
         }
     })
 }
