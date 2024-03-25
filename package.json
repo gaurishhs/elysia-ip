@@ -1,6 +1,6 @@
 {
   "name": "elysia-ip",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "type": "module",
   "author": {
     "name": "Gaurish Sethia",
@@ -35,11 +35,11 @@
     "@types/bun": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
-    "elysia": "^0.7.15",
+    "elysia": "^1.0.9",
     "eslint": "^8.50.0",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "elysia": ">= 0.2.0"
+    "elysia": ">= 1.0.9"
   }
 }

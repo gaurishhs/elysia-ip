@@ -36,7 +36,7 @@ export const ip = (config: {
      */
     checkHeaders?: IPHeaders[]
 } = {}) => (app: Elysia) => {
-    return app.derive(({ request }) => {
+    return app.derive({ as: 'global' }, ({ request }) => {
         // @ts-ignore
         if (globalThis.Bun) {
             if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)

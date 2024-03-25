@@ -10,6 +10,8 @@ Please consider starring the repository to show your ❤️ and support.
 ## Installation
 
 Requires Bun v1.0.4 or above.
+Requires Elysia v1.0.9 or above. 
+For older elysia versions please install v0.0.7 of this package
 
 ```bash
 bun a elysia-ip
