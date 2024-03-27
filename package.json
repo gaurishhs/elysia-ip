@@ -12,12 +12,12 @@
     "url": "https://github.com/gaurishhs/elysia-ip"
   },
   "exports": {
-    "main": "./src/index.ts",
-    "require": "./src/index.ts",
-    "import": "./src/index.ts",
-    "node": "./src/index.ts",
-    "default": "./src/index.ts",
-    "types": "./src/index.ts"
+    "main": "./dist/index.js",
+    "require": "./dist/index.js",
+    "import": "./dist/index.js",
+    "node": "./dist/index.js",
+    "default": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
