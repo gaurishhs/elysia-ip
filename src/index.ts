@@ -38,16 +38,8 @@ export const ip = (config: {
 } = {}) => (app: Elysia) => {
     return app.derive({ as: 'global' }, ({ request }) => {
         // @ts-ignore
-        if (globalThis.Bun) {
-            if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)
-            return {
-                ip: app.server.requestIP(request)
-            }
-        }
-        // @ts-ignore
-        const clientIP = getIP(request.headers, config.checkHeaders)
         return {
-            ip: clientIP
+            ip: getIP(request.headers, config.checkHeaders)
         }
     })
 }
