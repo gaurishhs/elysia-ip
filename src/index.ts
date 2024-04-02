@@ -3,7 +3,7 @@ import { Elysia } from 'elysia';
 export type IPHeaders = 'x-real-ip' | 'x-client-ip' | 'cf-connecting-ip' | 'fastly-client-ip' | 'x-cluster-client-ip' | 'x-forwarded' | 'forwarded-for' | 'forwarded' | 'x-forwarded' | 'appengine-user-ip' | 'true-client-ip' | 'cf-pseudo-ipv4' | (string & {})
 export const headersToCheck: IPHeaders[] = [
     'x-real-ip', // Nginx proxy/FastCGI
-    'x-client-ip', // Apache https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html#page-header 
+    'x-client-ip', // Apache https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html#page-header
     'cf-connecting-ip', // Cloudflare
     'fastly-client-ip', // Fastly
     'x-cluster-client-ip', // GCP
@@ -13,7 +13,7 @@ export const headersToCheck: IPHeaders[] = [
     'x-forwarded', // RFC 7239
     'appengine-user-ip', // GCP
     'true-client-ip', // Akamai and Cloudflare
-    'cf-pseudo-ipv4', // Cloudflare 
+    'cf-pseudo-ipv4', // Cloudflare
 ]
 
 export const getIP = (headers: Headers, checkHeaders: IPHeaders[] = headersToCheck) => {
@@ -35,10 +35,17 @@ export const ip = (config: {
      * @default ['x-real-ip', 'x-client-ip', 'cf-connecting-ip', 'fastly-client-ip', 'x-cluster-client-ip', 'x-forwarded', 'forwarded-for', 'forwarded', 'x-forwarded', 'appengine-user-ip', 'true-client-ip', 'cf-pseudo-ipv4']
      */
     checkHeaders?: IPHeaders[]
-} = {}) => (app: Elysia) => {
+    /**
+     * Only check headers regardless of the runtime environment
+     * @default false
+     */
+    headersOnly?: boolean
+} = {
+    headersOnly: false
+}) => (app: Elysia) => {
     return app.derive({ as: 'global' }, ({ request }) => {
         // @ts-ignore
-        if (globalThis.Bun) {
+        if (!config.headersOnly && globalThis.Bun) {
             if (!app.server) throw new Error(`Elysia server is not initialized. Make sure to call Elyisa.listen()`)
             return {
                 ip: app.server.requestIP(request)

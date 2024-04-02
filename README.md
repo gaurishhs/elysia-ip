@@ -75,6 +75,15 @@ import { ip } from "elysia-ip";
 new Elysia().use(ip({ checkHeaders: "X-Forwarded-For" })).get("/", ({ ip }) => ip).listen(3000);
 ```
 
+You can also switch to Headers only mode by setting `headersOnly` to `true`. This will only check headers and not the `server.requestIP` property.
+
+```ts
+import { Elysia } from "elysia";
+import { ip } from "elysia-ip";
+
+new Elysia().use(ip({ headersOnly: true })).get("/", ({ ip }) => ip).listen(3000);
+```
+
 ## License
 MIT
 
