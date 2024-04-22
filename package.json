@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "updateall": "pnpm i && pnpm update -L && bun i",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
