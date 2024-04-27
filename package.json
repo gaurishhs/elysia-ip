@@ -28,7 +28,6 @@
   ],
   "scripts": {
     "build": "rm -rf dist && tsc --project tsconfig.esm.json",
-    "updateall": "pnpm i && pnpm update -L && bun i",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
