@@ -64,9 +64,10 @@ export const ip =
       /**
        *
        */
-      injectServer?: () => Server
+      injectServer: (app: Elysia) => Server | null
     } = {
       headersOnly: false,
+      injectServer: (app) => app.server,
     },
   ) =>
   (app: Elysia) => {
@@ -75,13 +76,16 @@ export const ip =
     }).derive({ as: "global" }, ({ request }) => {
       // @ts-ignore
       if (!config.headersOnly && globalThis.Bun) {
-        if (!app.server)
-          console.log(
-            `Elysia server is not initialized. Make sure to call Elyisa.listen()`,
-          )
-        return {
-          ip: app.server?.requestIP(request)?.address,
+        const server = config.injectServer(app)
+        if (server) {
+          return {
+            ip: server.requestIP(request)?.address,
+          }
         }
+        console.log(
+          `Elysia server is not initialized. Make sure to call Elyisa.listen()`,
+        )
+        console.log(`use injectServer to inject Server instance`)
       }
       // @ts-ignore
       const clientIP = getIP(request.headers, config.checkHeaders)
