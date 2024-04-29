@@ -70,27 +70,26 @@ export const ip =
       injectServer: (app) => app.server,
     },
   ) =>
-  (app: Elysia) => {
-    return new Elysia({
+  (app: Elysia) =>
+    new Elysia({
       name: "elysia-ip",
-    }).derive({ as: "global" }, ({ request }) => {
-      // @ts-ignore
+    }).derive({ as: "global" }, ({ request }): { ip: string } => {
       if (!config.headersOnly && globalThis.Bun) {
-        const server = config.injectServer(app)
-        if (server) {
-          return {
-            ip: server.requestIP(request)?.address,
-          }
+        const socketAddress = config.injectServer(app)?.requestIP(request)
+        if (socketAddress) return { ip: socketAddress.address }
+        else {
+          console.log(
+            `Elysia server is not initialized. Make sure to call Elyisa.listen()`,
+          )
+          console.log(`use injectServer to inject Server instance`)
         }
-        console.log(
-          `Elysia server is not initialized. Make sure to call Elyisa.listen()`,
-        )
-        console.log(`use injectServer to inject Server instance`)
       }
-      // @ts-ignore
-      const clientIP = getIP(request.headers, config.checkHeaders)
       return {
-        ip: clientIP,
+        ip:
+          getIP(request.headers, config.checkHeaders) ||
+          (function () {
+            console.log("Failed to get ip from header!")
+            return ""
+          })(),
       }
     })
-  }
