@@ -11,14 +11,14 @@
     "type": "git",
     "url": "https://github.com/gaurishhs/elysia-ip"
   },
+  "main": "./dist/index.js",
   "exports": {
-    "main": "./dist/index.js",
     "require": "./dist/index.js",
     "import": "./dist/index.js",
     "node": "./dist/index.js",
-    "default": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    "default": "./dist/index.js"
   },
+  "types": "./dist/index.d.ts",
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
   "keywords": [
@@ -32,9 +32,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/bun": "^1.1.0",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
+    "@types/bun": "^1.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
     "elysia": "^1.0.15",
     "eslint": "^9.1.1",
     "typescript": "^5.4.5"
