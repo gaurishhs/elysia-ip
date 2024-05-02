@@ -1,7 +1,7 @@
 import { Elysia } from "elysia"
-import { getIP } from "../services/getip"
-import { defaultOptions } from "../constants/defaultOptions"
-import type { Options } from "../types/options"
+import { getIP } from "./getip"
+import { defaultOptions } from "../constants"
+import type { Options } from "../types"
 
 export const plugin = (userOptions?: Partial<Options>) => (app: Elysia) => {
   const options: Options = {
