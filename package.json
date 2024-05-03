@@ -35,7 +35,7 @@
     "@types/bun": "^1.1.1",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "elysia": "^1.0.15",
+    "elysia": "^1.0.16",
     "eslint": "^9.1.1",
     "typescript": "^5.4.5"
   },
