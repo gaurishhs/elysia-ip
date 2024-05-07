@@ -27,6 +27,7 @@
     "ip"
   ],
   "scripts": {
+    "dev": "DEBUG=* bun run --hot example/basic.ts",
     "build": "rm -rf dist && tsc --project tsconfig.esm.json",
     "lint": "eslint . --ext .ts"
   },
@@ -35,8 +36,8 @@
     "@types/bun": "^1.1.1",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "elysia": "^1.0.15",
-    "eslint": "^9.1.1",
+    "elysia": "^1.0.16",
+    "eslint": "^9.2.0",
     "typescript": "^5.4.5"
   },
   "peerDependencies": {
