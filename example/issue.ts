@@ -1,5 +1,4 @@
 import { Elysia } from "elysia"
-// import { defaultOptions, ip } from "elysia-ip"
 import { defaultOptions, ip } from "../src/index"
 
 import type { Server } from "bun"

@@ -1,5 +1,22 @@
-import type { IPHeaders } from "./header"
-import type { injectServer } from "./injectserver"
+import type { Server } from "bun"
+import type Elysia from "elysia"
+
+export type IPHeaders =
+  | "x-real-ip"
+  | "x-client-ip"
+  | "cf-connecting-ip"
+  | "fastly-client-ip"
+  | "x-cluster-client-ip"
+  | "x-forwarded"
+  | "forwarded-for"
+  | "forwarded"
+  | "x-forwarded"
+  | "appengine-user-ip"
+  | "true-client-ip"
+  | "cf-pseudo-ipv4"
+  | (string & {})
+
+export type InjectServer = (app: Elysia) => Server | null
 
 export interface Options {
   /**
@@ -15,5 +32,5 @@ export interface Options {
   /**
    *
    */
-  injectServer: injectServer
+  injectServer: InjectServer
 }
