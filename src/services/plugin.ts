@@ -36,10 +36,7 @@ export const plugin = (userOptions?: Partial<Options>) => (app: Elysia) => {
           const socketAddress = server.requestIP(request)
           logger("plugin", "socketAddress", socketAddress)
           if (!socketAddress) {
-            logger(
-              "plugin",
-              `ip from server.requestIP return ${typeof socketAddress}`,
-            )
+            logger("plugin", "ip from server.requestIP return `null`")
             break serverIP
           }
           return { ip: socketAddress.address }
