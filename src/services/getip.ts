@@ -6,6 +6,11 @@ export const getIP = (
   headers: Headers,
   checkHeaders: IPHeaders[] = headersToCheck,
 ) => {
+  if (typeof checkHeaders === "string" && headers.get(checkHeaders)) {
+    logger("getIP", `Found ip from header ${checkHeaders}`)
+    return headers.get(checkHeaders)
+  }
+
   // X-Forwarded-For is the de-facto standard header
   if (!checkHeaders && headers.get("x-forwarded-for")) {
     logger("getIP", "IP From Header x-forwarded-for")
