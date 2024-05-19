@@ -6,15 +6,25 @@ export const getIP = (
   headers: Headers,
   checkHeaders: IPHeaders[] | IPHeaders = headersToCheck,
 ) => {
-  if (typeof checkHeaders === "string") {
-    const clientIP = headers.get(checkHeaders)
-    if (!checkHeaders || !clientIP) {
-      logger("getIP", "Can't get ip from header `", checkHeaders)
-      return null
-    }
+  stringCheck: {
+    if (typeof checkHeaders === "string") {
+      const clientIP = headers.get(checkHeaders)
+      if (!checkHeaders) {
+        logger(
+          "getIP",
+          "checkHeaders is empty, Running using default checkHeaders",
+        )
+        checkHeaders = headersToCheck
+        break stringCheck
+      }
 
-    logger("getIP", `Found ip from header ${checkHeaders}, IP :${clientIP}`)
-    return clientIP
+      if (!clientIP) {
+        logger("getIP", "Can't get ip from header `", checkHeaders)
+      }
+
+      logger("getIP", `Found ip from header ${checkHeaders}, IP :${clientIP}`)
+      return clientIP
+    }
   }
 
   let clientIP: string | null = null
