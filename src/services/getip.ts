@@ -4,36 +4,30 @@ import { logger } from "./logger"
 
 export const getIP = (
   headers: Headers,
-  checkHeaders: IPHeaders[] = headersToCheck,
+  checkHeaders: IPHeaders[] | IPHeaders = headersToCheck,
 ) => {
-  if (typeof checkHeaders === "string" && headers.get(checkHeaders)) {
-    logger("getIP", `Found ip from header ${checkHeaders}`)
-    return headers.get(checkHeaders)
+  if (typeof checkHeaders === "string") {
+    const clientIP = headers.get(checkHeaders)
+    if (!checkHeaders || !clientIP) {
+      logger("getIP", "Can't get ip from header `", checkHeaders)
+      return null
+    }
+
+    logger("getIP", `Found ip from header ${checkHeaders}, IP :${clientIP}`)
+    return clientIP
   }
 
-  // X-Forwarded-For is the de-facto standard header
-  if (!checkHeaders && headers.get("x-forwarded-for")) {
-    logger("getIP", "IP From Header x-forwarded-for")
-    return headers.get("x-forwarded-for")?.split(",")[0]
-  }
-
-  if (!checkHeaders) {
-    logger("getIP", "checkHeaders `false` return `null`")
-    return null
-  }
-
-  let clientIP: string | undefined | null = null
+  let clientIP: string | null = null
   for (const header of checkHeaders) {
     clientIP = headers.get(header)
     if (clientIP) {
-      logger("getIP", `Found ip from header ${header}`)
+      logger("getIP", `Found ip from header ${header}, IP : ${clientIP}`)
       break
     }
   }
 
   if (!clientIP) {
     logger("getIP", "Failed to get ip from header!")
-    return
   }
   return clientIP
 }
