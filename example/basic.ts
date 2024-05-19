@@ -3,7 +3,6 @@ import { Elysia } from "elysia"
 import { ip } from "../src"
 
 const app = new Elysia()
-  .use(swagger())
   .use(ip())
   .get("/", ({ ip }) => ({ hello: ip }))
   .listen(3000, () => {
