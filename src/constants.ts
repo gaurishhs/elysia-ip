@@ -9,7 +9,7 @@ export const headersToCheck: IPHeaders[] = [
   "x-forwarded", // General Forwarded
   "forwarded-for", // RFC 7239
   "forwarded", // RFC 7239
-  "x-forwarded", // RFC 7239
+  "x-forwarded-for", // RFC 7239
   "appengine-user-ip", // GCP
   "true-client-ip", // Akamai and Cloudflare
   "cf-pseudo-ipv4", // Cloudflare
