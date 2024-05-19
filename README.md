@@ -29,7 +29,9 @@ This plugin adds a `ip` property to the context object. It contains the client i
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip()).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip())
+  .get("/", ({ ip }) => ip).listen(3000);
 ```
 
 ### How does it work?
@@ -44,15 +46,15 @@ We also add support for `X-Forwarded-For` header (de-facto standard header) and 
 Priority list:
 
 1. User specified
-2. `X-Forwarded-For` (de-facto standard header)
-3. `CF-Connecting-IP` (Cloudflare)
-4. `Fastly-Client-IP` (Fastly)
-5. `X-Real-IP` (Apache)
-6. `X-Client-IP` (Nginx)
-7. `X-Cluster-Client-IP` (GCP)
-8. `X-Forwarded` (RFC 7239)
-9. `Forwarded-For` (RFC 7239)
-10. `Forwarded` (RFC 7239)
+2. `X-Real-IP` (Apache)
+3. `X-Client-IP` (Nginx)
+4. `CF-Connecting-IP` (Cloudflare)
+5. `Fastly-Client-IP` (Fastly)
+6. `X-Cluster-Client-IP` (GCP)
+7. `X-Forwarded` (RFC 7239)
+8. `Forwarded-For` (RFC 7239)
+9. `Forwarded` (RFC 7239)
+10. `X-Forwarded-For` (de-facto standard header)
 11. `appengine-user-ip` (GCP)
 12. `true-client-ip` (Akamai and Cloudflare)
 13. `cf-pseudo-ipv4` (Cloudflare)
@@ -63,7 +65,9 @@ You can even specify your own headers if you want to as following
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ checkHeaders: ["X-Forwarded-For", "X-Real-IP"] })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ checkHeaders: ["X-Forwarded-For", "X-Real-IP"] }))
+  .get("/", ({ ip }) => ip).listen(3000);
 ```
 
 or 
@@ -72,7 +76,9 @@ or
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ checkHeaders: "X-Forwarded-For" })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ checkHeaders: "X-Forwarded-For" }))
+  .get("/", ({ ip }) => ip).listen(3000);
 ```
 
 You can also switch to Headers only mode by setting `headersOnly` to `true`. This will only check headers and not the `server.requestIP` property.
@@ -81,8 +87,15 @@ You can also switch to Headers only mode by setting `headersOnly` to `true`. Thi
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ headersOnly: true })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ headersOnly: true }))
+  .get("/", ({ ip }) => ip).listen(3000);
 ```
+
+### Error
+If elysia-ip only return empty string, Please using `debug` mode by add `DEBUG` in env or using command like `"dev": "DEBUG=* bun run --hot example/basic.ts"`
+
+Logger will tell error or where ip came from.
 
 ## License
 MIT
