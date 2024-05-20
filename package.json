@@ -21,13 +21,9 @@
   "types": "./dist/index.d.ts",
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
-  "keywords": [
-    "elysia",
-    "typescript",
-    "ip"
-  ],
+  "keywords": ["elysia", "typescript", "ip"],
   "scripts": {
-    "dev": "DEBUG=* bun run --hot example/basic.ts",
+    "dev": "NODE_DEBUG=* bun run --hot example/basic.ts",
     "build": "rm -rf dist && tsc --project tsconfig.esm.json",
     "lint": "eslint . --ext .ts"
   },
@@ -43,8 +39,5 @@
   },
   "peerDependencies": {
     "elysia": ">= 1.0.9"
-  },
-  "dependencies": {
-    "debug": "^4.3.4"
   }
 }

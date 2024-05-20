@@ -10,7 +10,7 @@ Please consider starring the repository to show your ❤️ and support.
 ## Installation
 
 Requires Bun v1.0.4 or above.
-Requires Elysia v1.0.9 or above. 
+Requires Elysia v1.0.9 or above.
 For older elysia versions please install v0.0.7 of this package
 
 ```bash
@@ -29,14 +29,17 @@ This plugin adds a `ip` property to the context object. It contains the client i
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip()).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip())
+  .get("/", ({ ip }) => ip)
+  .listen(3000);
 ```
 
 ### How does it work?
 
 For Bun runtime, We use `server.requestIP` introduced in Bun v1.0.4 to get the client ip address and early return it.
 
-It relies on headers for runtimes other than Bun. 
+It relies on headers for runtimes other than Bun.
 Cloudflare and other providers send back specific headers, containing the IP address. For example `CF-Connecting-IP` for Cloudflare and `Fastly-Client-IP` for Fastly.
 
 We also add support for `X-Forwarded-For` header (de-facto standard header) and other various headers.
@@ -63,16 +66,22 @@ You can even specify your own headers if you want to as following
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ checkHeaders: ["X-Forwarded-For", "X-Real-IP"] })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ checkHeaders: ["X-Forwarded-For", "X-Real-IP"] }))
+  .get("/", ({ ip }) => ip)
+  .listen(3000);
 ```
 
-or 
+or
 
 ```ts
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ checkHeaders: "X-Forwarded-For" })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ checkHeaders: "X-Forwarded-For" }))
+  .get("/", ({ ip }) => ip)
+  .listen(3000);
 ```
 
 You can also switch to Headers only mode by setting `headersOnly` to `true`. This will only check headers and not the `server.requestIP` property.
@@ -81,11 +90,20 @@ You can also switch to Headers only mode by setting `headersOnly` to `true`. Thi
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 
-new Elysia().use(ip({ headersOnly: true })).get("/", ({ ip }) => ip).listen(3000);
+new Elysia()
+  .use(ip({ headersOnly: true }))
+  .get("/", ({ ip }) => ip)
+  .listen(3000);
 ```
 
+## Debugging
+
+Please use run the command setting environment variable `NODE_DEBUG` to either `*` or `elysia-ip`
+
 ## License
+
 MIT
 
 ## Author
+
 Copyright (c) 2023 Gaurish Sethia, All Rights Reserved.
