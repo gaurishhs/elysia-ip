@@ -48,10 +48,10 @@ Priority list:
 
 1. User specified
 2. `X-Forwarded-For` (de-facto standard header)
-3. `CF-Connecting-IP` (Cloudflare)
-4. `Fastly-Client-IP` (Fastly)
-5. `X-Real-IP` (Apache)
-6. `X-Client-IP` (Nginx)
+3. `X-Real-IP` (Apache)
+4. `X-Client-IP` (Nginx)
+5. `CF-Connecting-IP` (Cloudflare)
+6. `Fastly-Client-IP` (Fastly)
 7. `X-Cluster-Client-IP` (GCP)
 8. `X-Forwarded` (RFC 7239)
 9. `Forwarded-For` (RFC 7239)
