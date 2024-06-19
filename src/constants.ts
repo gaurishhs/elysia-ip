@@ -13,6 +13,7 @@ export const headersToCheck: IPHeaders[] = [
   "appengine-user-ip", // GCP
   "true-client-ip", // Akamai and Cloudflare
   "cf-pseudo-ipv4", // Cloudflare
+  "fly-client-ip", // Fly.io
 ]
 
 export const defaultOptions: Options = {
