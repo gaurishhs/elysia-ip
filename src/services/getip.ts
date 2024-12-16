@@ -12,7 +12,7 @@ export const getIP = (
   }
 
   // X-Forwarded-For is the de-facto standard header
-  if (!checkHeaders && headers.get("x-forwarded-for")) {
+  if (headers.get("x-forwarded-for")) {
     debug("getIP: IP From Header x-forwarded-for");
     return headers.get("x-forwarded-for")?.split(",")[0];
   }
