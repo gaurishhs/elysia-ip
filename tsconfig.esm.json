@@ -3,7 +3,7 @@
     "target": "ES2021",
     "lib": ["ESNext", "DOM", "ScriptHost"],
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "types": ["bun-types"],
     "declaration": true,
     "outDir": "./dist",
