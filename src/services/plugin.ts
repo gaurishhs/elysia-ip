@@ -14,7 +14,7 @@ export const plugin = function ipPlugin(userOptions?: Partial<Options>) {
     return app.use(
       new Elysia({
         name: "elysia-ip",
-      }).derive({ as: "global" }, function serverIP({ request }): { ip: string } {
+      }).derive({ as: "global" }, function ip({ request }): { ip: string } {
         serverIP: {
           if (!options.headersOnly && globalThis.Bun) {
             const server = options.injectServer(app);
