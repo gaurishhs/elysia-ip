@@ -14,10 +14,10 @@ export const plugin = function ipPlugin(userOptions?: Partial<Options>) {
     return app.use(
       new Elysia({
         name: "elysia-ip",
-      }).derive({ as: "global" }, function ip({ request }): { ip: string } {
+      }).derive({ as: "global" }, function ip({ server: ctxServer, request }): { ip: string } {
         serverIP: {
           if (!options.headersOnly && globalThis.Bun) {
-            const server = options.injectServer(app);
+            const server = options.injectServer(app) ?? ctxServer;
             if (!server) {
               debug(
                 "plugin: Elysia server is not initialized. Make sure to call Elyisa.listen()",
