@@ -30,7 +30,11 @@ export interface Options {
    */
   headersOnly?: boolean
   /**
-   *
+   * Prioritize the IP address from the headers over the one obtained from the bun server
+   * @default false
+   */
+  headersFirst?: boolean
+  /**
    */
   injectServer: InjectServer
 }

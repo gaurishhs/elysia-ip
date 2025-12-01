@@ -96,6 +96,20 @@ new Elysia()
   .listen(3000);
 ```
 
+There might be cases where both are present, but you want to prioritize the IP from the headers (eg. when potentially running in Render.com, where otherwise the IP address will the the internal proxy).  You can also switch to Headers-first mode by setting `headersFirst` to `true`. This will obtain both, and return the IP address from the headers if it finds it, otherwise default to the `server.requestIP` property.
+
+```ts
+import { Elysia } from "elysia";
+import { ip } from "elysia-ip";
+
+new Elysia()
+  .use(ip({ headersFirst: true }))
+  .get("/", ({ ip }) => ip)
+  .listen(3000);
+```
+
+
+
 ## Debugging
 
 Please use run the command setting environment variable `NODE_DEBUG` to either `*` or `elysia-ip`
