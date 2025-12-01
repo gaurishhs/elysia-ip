@@ -7,12 +7,12 @@ export const getIPFromContext = (server: any, request: Request) => {
 
   if (!server) {
     debug(
-      "plugin: Elysia server is not initialized. Make sure to call Elyisa.listen()"
+      "plugin: Elysia server is not initialized. Make sure to call Elysia.listen()"
     );
     debug("plugin: use injectServer to inject Server instance");
   } else if (!server.requestIP) {
     debug("plugin: server.requestIP is null");
-    debug("plugin: Please check server instace");
+    debug("plugin: Please check server instance");
   } else {
     const socketAddress = server.requestIP(request);
     debug(`plugin: socketAddress ${JSON.stringify(socketAddress)}`);
@@ -36,7 +36,7 @@ export const getIPFromHeaders = (
     return headers.get(checkHeaders);
   }
 
-  // check for x-forwaded-for only when user did not provide headers
+  // check for x-forwarded-for only when user did not provide headers
   if (
     checkHeaders &&
     checkHeaders === headersToCheck &&
