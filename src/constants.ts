@@ -1,4 +1,4 @@
-import { Options, IPHeaders } from "./types"
+import { Options, IPHeaders } from "./types";
 
 export const headersToCheck: IPHeaders[] = [
   "x-real-ip", // Nginx proxy/FastCGI
@@ -14,10 +14,11 @@ export const headersToCheck: IPHeaders[] = [
   "true-client-ip", // Akamai and Cloudflare
   "cf-pseudo-ipv4", // Cloudflare
   "fly-client-ip", // Fly.io
-]
+];
 
 export const defaultOptions: Options = {
   headersOnly: false,
+  headersFirst: false,
   checkHeaders: headersToCheck,
   injectServer: (app) => app.server,
-}
+};

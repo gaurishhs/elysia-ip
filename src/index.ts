@@ -1,4 +1,4 @@
-export { getIP } from "./services/getip";
+export { getIPFromHeaders as getIP } from "./services/getip";
 export { plugin as ip } from "./services/plugin";
 
 export { defaultOptions, headersToCheck } from "./constants";
