@@ -7,32 +7,21 @@ on:
   release:
     types: [created]
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org/
-
       - uses: oven-sh/setup-bun@v1
-
+        with:
+          bun-version: latest
       - run: bun i
-
-      - name: Setup npm auth
-        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - run: bun run build
-
-      - run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: bun run build && npm publish
