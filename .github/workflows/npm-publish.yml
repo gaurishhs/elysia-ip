@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
+      - run: npm install -g npm@latest
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
