@@ -11,20 +11,26 @@
     "type": "git",
     "url": "https://github.com/gaurishhs/elysia-ip"
   },
-  "main": "./dist/index.js",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.js",
-    "node": "./dist/index.js",
-    "default": "./dist/index.js"
+    ".": "./dist/index.mjs",
+    "./constants": "./dist/constants.mjs",
+    "./services/debug": "./dist/services/debug.mjs",
+    "./services/getip": "./dist/services/getip.mjs",
+    "./services/plugin": "./dist/services/plugin.mjs",
+    "./types": "./dist/types.mjs",
+    "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "bugs": "https://github.com/gaurishhs/elysia-ip/issues",
   "homepage": "https://github.com/gaurishhs/elysia-ip",
-  "keywords": ["elysia", "typescript", "ip"],
+  "keywords": [
+    "elysia",
+    "typescript",
+    "ip"
+  ],
   "scripts": {
     "dev": "NODE_DEBUG=* bun run --hot example/basic.ts",
-    "build": "rm -rf dist && tsc --project tsconfig.esm.json",
+    "build": "tsdown",
     "lint": "eslint . --ext .ts"
   },
   "license": "MIT",
@@ -35,6 +41,7 @@
     "@typescript-eslint/parser": "^7.9.0",
     "elysia": "^1.3.1",
     "eslint": "^9.2.0",
+    "tsdown": "^0.22.2",
     "typescript": "^5.4.5"
   },
   "peerDependencies": {

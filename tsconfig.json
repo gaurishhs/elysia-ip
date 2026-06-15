@@ -3,15 +3,22 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "ES2021",
-    "types": ["bun-types"],
+    "types": [
+      "bun"
+    ],
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "moduleResolution": "bundler",
     "module": "ES2022",
-    "outDir": "./dist",
-    "lib": ["ESNext", "DOM", "ScriptHost"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "ScriptHost"
+    ],
     "declaration": true
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }
