@@ -16,7 +16,7 @@ export type IPHeaders =
   | "cf-pseudo-ipv4"
   | (string & {})
 
-export type InjectServer = (app: Elysia) => Server | null
+export type InjectServer = (app: Elysia) => Server | undefined
 
 export interface Options {
   /**

@@ -14,11 +14,11 @@ export const plugin = function ipPlugin(userOptions?: Partial<Options>) {
     return app.use(
       new Elysia({
         name: "elysia-ip",
-      }).derive({ as: "global" }, function ip({ server: ctxServer, request }): {
+      }).derive(function ip({ server: ctxServer, request }): {
         ip: string;
       } {
         let serverIP: string | null = null;
-
+      
         if (!options.headersOnly && globalThis.Bun) {
           const server = options.injectServer(app) ?? ctxServer;
           serverIP = getIPFromContext(server, request);
@@ -30,7 +30,7 @@ export const plugin = function ipPlugin(userOptions?: Partial<Options>) {
             ? headersIP || serverIP || ""
             : serverIP || headersIP || "",
         };
-      })
+      }).as('global')
     );
   };
 };
